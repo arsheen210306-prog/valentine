@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Hey Manan 😼</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Poppins, sans-serif;
+    background:linear-gradient(135deg,#2f5d9f,#4f7fc1);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    overflow:hidden;
+}
+
+.card{
+    background:white;
+    width:92%;
+    max-width:430px;
+    padding:32px;
+    border-radius:25px;
+    text-align:center;
+    box-shadow:0 20px 40px rgba(0,0,0,.25);
+}
+
+h1{color:#2f5d9f;margin-bottom:6px}
+.small{font-size:13px;color:gray;margin-bottom:16px}
+.message{font-size:15.5px;line-height:1.6;margin-bottom:18px}
+
+.countdown{
+    background:#e8f0ff;
+    padding:10px;
+    border-radius:12px;
+    margin-bottom:18px;
+    font-weight:bold;
+    color:#2f5d9f;
+    font-size:14px;
+}
+
+.switches label{
+    display:block;
+    font-size:14px;
+    margin:5px 0;
+}
+
+.btns{
+    position:relative;
+    height:70px;
+    margin-top:15px;
+}
+
+button{
+    padding:12px 22px;
+    border-radius:20px;
+    border:none;
+    font-size:15px;
+    cursor:pointer;
+}
+
+.yes{
+    background:#2f5d9f;
+    color:white;
+}
+
+.no{
+    background:#e8f0ff;
+    color:#2f5d9f;
+    position:absolute;
+    left:140px;
+}
+
+.result{
+    margin-top:20px;
+    font-weight:bold;
+    color:#2f5d9f;
+}
+
+/* confetti */
+.confetti{
+    position:fixed;
+    width:8px;
+    height:8px;
+    top:-10px;
+    animation:fall 3s linear forwards;
+}
+@keyframes fall{
+    to{transform:translateY(110vh) rotate(720deg);opacity:0;}
+}
+
+/* floating hearts */
+@keyframes float{
+    to{transform:translateY(-110vh);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- background music -->
+<iframe width="0" height="0"
+src="https://www.youtube.com/embed/BcqxLCWn-CE?autoplay=1&loop=1&playlist=BcqxLCWn-CE"
+allow="autoplay">
+</iframe>
+
+<div class="card">
+
+<h1>Hey Manan 😼</h1>
+<div class="small">Arsheen + Manan since 15 Dec 2025</div>
+
+<div class="message">
+We survived bad jokes, random fights, and me stealing your fries.<br><br>
+
+Now you went home like a responsible adult 🙄  
+So we can’t even celebrate Valentine’s together.<br><br>
+
+But distance doesn’t cancel your duties sir 😼  
+You’re still stuck being my Valentine.
+</div>
+
+<div class="countdown" id="countdown"></div>
+
+<div class="switches">
+<label><input type="checkbox"> tolerate Arsheen</label>
+<label><input type="checkbox"> share snacks</label>
+<label><input type="checkbox"> handle chaos</label>
+<label><input type="checkbox"> be Valentine</label>
+</div>
+
+<div class="btns">
+<button class="yes" id="yesBtn">YES obviously 😎</button>
+<button class="no" id="noBtn">No 🤨</button>
+</div>
+
+<div class="result" id="result"></div>
+
+</div>
+
+<script>
+
+/* countdown */
+const startDate=new Date("December 15, 2025 00:00:00").getTime();
+setInterval(()=>{
+    const diff=new Date().getTime()-startDate;
+    const d=Math.floor(diff/(1000*60*60*24));
+    const h=Math.floor((diff/(1000*60*60))%24);
+    const m=Math.floor((diff/(1000*60))%60);
+    document.getElementById("countdown").innerHTML=
+    "Together for: "+d+" days "+h+" hrs "+m+" mins 💙";
+},1000);
+
+
+/* NO runs away */
+const noBtn=document.getElementById("noBtn");
+noBtn.addEventListener("mouseover",()=>{
+    const x=Math.random()*180-90;
+    const y=Math.random()*70-35;
+    noBtn.style.transform=`translate(${x}px,${y}px)`;
+});
+
+
+/* teasing messages */
+const msgs=[
+"Nice try 😂",
+"Wrong button mister",
+"System says choose YES",
+"You really thought No works?",
+"Stop pretending 😼"
+];
+
+noBtn.onclick=()=>{
+    document.getElementById("result").innerHTML=
+    msgs[Math.floor(Math.random()*msgs.length)];
+};
+
+
+/* YES chaos logic */
+const yesBtn=document.getElementById("yesBtn");
+let attempts=0;
+
+yesBtn.addEventListener("mouseenter",()=>{
+    if(attempts<2){
+        attempts++;
+        noBtn.style.left="0px";
+        noBtn.style.top="0px";
+        noBtn.style.zIndex=5;
+        setTimeout(()=>noBtn.style.zIndex=1,600);
+    }
+});
+
+yesBtn.onclick=()=>{
+    if(attempts<2) return;
+
+    const result=document.getElementById("result");
+    result.innerHTML="Processing request... ⏳";
+
+    setTimeout(()=>{
+        result.innerHTML="Compatibility: 99.9% 💙";
+    },800);
+
+    setTimeout(()=>{
+        result.innerHTML="Valentine unlocked 😼";
+        confetti();
+    },1600);
+};
+
+
+/* confetti */
+function confetti(){
+    for(let i=0;i<120;i++){
+        const c=document.createElement("div");
+        c.className="confetti";
+        c.style.left=Math.random()*100+"vw";
+        c.style.background=Math.random()>0.5?"#2f5d9f":"white";
+        document.body.appendChild(c);
+        setTimeout(()=>c.remove(),3000);
+    }
+}
+
+
+/* floating hearts */
+setInterval(()=>{
+    const h=document.createElement("div");
+    h.innerHTML="💙";
+    h.style.position="fixed";
+    h.style.left=Math.random()*100+"vw";
+    h.style.bottom="-10px";
+    h.style.animation="float 5s linear forwards";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),5000);
+},1500);
+
+</script>
+
+</body>
+</html>
